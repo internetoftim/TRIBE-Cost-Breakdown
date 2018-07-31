@@ -76,8 +76,24 @@ def decompose_image(int_n=10,i_comp=5,ii_comp=10,i_val=450,ii_val=800,media_type
                     out_decomposition.append('%d x $%d' % (i,i_comp))
                 return out_decomposition
                 
-            
-        
-        
+####################################################################################################
+# Define extract_breakdown(). Get breakdown from one row string input
+# test_input = '10 IMG 15 FLAC 13 VID'
+####################################################################################################
+def extract_breakdown(input_string='10 IMG 15 FLAC 13 VID'):
+    input_list = input_string.split()
+    output_val=[]
+    while input_list:
+        count = int(input_list.pop(0))
+        media_type = input_list.pop(0)
+        if (media_type == 'IMG'):
+            output_val+= decompose_image(count)
+        elif (media_type == 'FLAC'):
+            output_val+= decompose_audio(count)
+        elif (media_type == 'VID'):
+            output_val+= decompose_video(count)
+        else:
+            output_val+= '%d %s INVALID MEDIA TYPE' % (count,media_type)
+    return output_val
             
                 
